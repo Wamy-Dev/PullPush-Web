@@ -4,6 +4,7 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import Icon from '@iconify/svelte';
+	import { LightSwitch } from '@skeletonlabs/skeleton';
 </script>
 <AppShell>
 	<svelte:fragment slot="header">
@@ -40,19 +41,28 @@
 		</AppBar>
 	</svelte:fragment>
 	<svelte:fragment slot="pageFooter">
-		<div class="flex justify-between p-3">
-			<strong class="text-xl">PullPush.io Search</strong>
-			<p>By using <a href="https://pullpush.io" 
-				target="_blank" 
-				referrerpolicy="no-referrer" 
-				class="underline cursor-pointer font-bold">PullPush.io</a> you agree to the <a href="https://pullpush.io/tos.html" 
-				target="_blank" 
-				referrerpolicy="no-referrer" 
-				class="underline cursor-pointer font-bold">TOS</a></p>
-			<p>WebUI made by <a href="https://github.com/Wamy-Dev" 
-				target="_blank" 
-				referrerpolicy="no-referrer" 
-				class="underline cursor-pointer font-bold">Wamy</a></p>
+		<div class="grid grid-cols-3 p-3 gap-6 items-center">
+			<div class="flex justify-start">
+				<LightSwitch rounded="rounded-3xl" />
+			</div>
+			<div class="text-center">
+				<p>By using <a href="https://pullpush.io" 
+					target="_blank" 
+					referrerpolicy="no-referrer" 
+					class="underline cursor-pointer font-bold ">PullPush.io</a> you agree to the <a href="https://pullpush.io/tos.html" 
+					target="_blank" 
+					referrerpolicy="no-referrer" 
+					class="underline cursor-pointer font-bold">TOS</a>
+				</p>
+			</div>
+			<div class="flex justify-end">
+				<p>WebUI made by <a href="https://github.com/Wamy-Dev" 
+					target="_blank" 
+					referrerpolicy="no-referrer" 
+					class="underline cursor-pointer font-bold">Wamy</a>
+				</p>
+			</div>
+			
 		</div>
 	</svelte:fragment>
 	<slot />
