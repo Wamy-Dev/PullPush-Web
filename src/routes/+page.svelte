@@ -4,7 +4,7 @@
 	import '../app.postcss';
 	import Icon from '@iconify/svelte';
 
-	let retrievalType = "posts";
+	let retrievalType = "submissions";
 	function changeType(e) {
 		retrievalType = e.target.value;
 	}
