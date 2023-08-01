@@ -3,6 +3,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import Icon from '@iconify/svelte';
+	import formVerification from '$lib/formVerification';
 
 	let retrievalType = "submissions";
 	function changeType(e) {
@@ -12,7 +13,7 @@
 		e.preventDefault();
 		const form = e.target;
 		const data = new FormData(form);
-		const value = Object.fromEntries(data.entries());
+		const value = formVerification(data);
 		console.log(value);
 	}
 </script>
