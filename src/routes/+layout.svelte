@@ -9,7 +9,7 @@
 	<svelte:fragment slot="header">
 		<AppBar class="rounded-b-3xl">
 			<svelte:fragment slot="lead" >
-				<strong class="text-xl">PullPush.io Search</strong>
+				<a href="/" class="text-xl font-bold">PullPush.io Search</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a
@@ -38,6 +38,22 @@
 				</a>
 			</svelte:fragment>
 		</AppBar>
+	</svelte:fragment>
+	<svelte:fragment slot="pageFooter">
+		<div class="flex justify-between p-3">
+			<strong class="text-xl">PullPush.io Search</strong>
+			<p>By using <a href="https://pullpush.io" 
+				target="_blank" 
+				referrerpolicy="no-referrer" 
+				class="underline cursor-pointer font-bold">PullPush.io</a> you agree to the <a href="https://pullpush.io/tos.html" 
+				target="_blank" 
+				referrerpolicy="no-referrer" 
+				class="underline cursor-pointer font-bold">TOS</a></p>
+			<p>WebUI made by <a href="https://github.com/Wamy-Dev" 
+				target="_blank" 
+				referrerpolicy="no-referrer" 
+				class="underline cursor-pointer font-bold">Wamy</a></p>
+		</div>
 	</svelte:fragment>
 	<slot />
 </AppShell>
