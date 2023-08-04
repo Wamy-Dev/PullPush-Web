@@ -6,11 +6,13 @@
 	import formVerification from '$lib/formVerification';
 	import { PUBLIC_API_URL, PUBLIC_API_KEY } from '$env/static/public';
 	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
-
+	import ResultItem from '$lib/returnItem.svelte';
 
 	let retrievalType = "submission";
 	let loading = false;
+	let returnData = [];
 	function changeType(e) {
+		returnData = [];
 		retrievalType = e.target.value;
 	}
 	async function handleSubmit(e) {
@@ -24,7 +26,8 @@
 			console.log(queryString);
 			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?${queryString}&pass=${PUBLIC_API_KEY}`)
 			const json = await response.json();
-			console.log(json)
+			returnData = [];
+			returnData = json.data;
 			loading = false;
 		} catch (error) {
 			const t: ToastSettings = {
@@ -33,9 +36,10 @@
 				hoverable: true
 			};
 			toastStore.trigger(t);
+			loading = false;
 		}
-		
 	}
+	console.log(returnData);
 </script>
 
 <div class="search flex justify-center my-5 mx-5">
@@ -172,6 +176,13 @@
 				</button>
 			</div>
 		</form>
+	</div>
+</div>
+<div class="results flex justify-center my-5 mx-5">
+	<div>
+		{#each returnData as item}
+			<ResultItem item={item} type={retrievalType}/>
+		{/each}
 	</div>
 </div>
 

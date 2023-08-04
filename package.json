@@ -38,6 +38,13 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"dayjs": "^1.11.9"
+		"dayjs": "^1.11.9",
+		"sugar": "^2.0.6",
+		"svelte-markdown": "^0.3.0"
+	},
+	"overrides": {
+		"svelte-markdown": {
+			"svelte": "^4.0.0"
+		}
 	}
 }
