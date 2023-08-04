@@ -23,10 +23,18 @@
 			const json = await response.json();
 			returnData = [];
 			returnData = json.data;
+			if (returnData.length === 0) {
+				const t: ToastSettings = {
+					message: "No results found for your search. Please try again with different parameters.",
+					background: "variant-filled-error",
+					autohide: false
+				};
+				toastStore.trigger(t);
+			}
 			return true
 		} catch {
 			const t: ToastSettings = {
-				message: "An error occurred while searching, please try again later.",
+				message: "An error occurred while searching. Please try again later.",
 				background: "variant-filled-error",
 				hoverable: true
 			};
@@ -51,6 +59,7 @@
 	}
 	async function handleSubmit(e) {
 		returnData = []
+		toastStore.clear();
 		e.preventDefault();
 		loading = true;
 		const form = e.target;
