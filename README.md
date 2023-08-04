@@ -1,4 +1,6 @@
-# PullPush.io Search - The Official Search Site for [PullPush.io](https://pullpush.io)
+<h1 align="center">Reddit Search</h1>
+
+### Powered by [PullPush.io](https://pullpush.io)
 
 <div align="center">
   <img src="/assets/lightmock.png#gh-light-mode-only" borderRadius="20">
