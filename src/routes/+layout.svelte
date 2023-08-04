@@ -11,7 +11,7 @@
 	<svelte:fragment slot="header">
 		<AppBar class="rounded-b-3xl variant-ghost-surface">
 			<svelte:fragment slot="lead">
-				<a href="/" class="text-xl font-bold">PullPush.io Search</a>
+				<a href="/" class="text-xl font-bold">Reddit-Search</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a

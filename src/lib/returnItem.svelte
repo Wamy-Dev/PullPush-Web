@@ -38,7 +38,7 @@
 {:else if type === "comment"}
     <a href={`https://reddit.com${item.permalink}`} target="_blank" rel="noreferrer">
         <div class="bg-surface-100-800-token rounded-3xl max-w-5xl w-full p-4 variant-ghost-surface my-3">
-            <h1 class="sm:text-xl font-bold break-all">
+            <h1 class="sm:text-md font-bold break-all">
                 {item.body}
             </h1>
             <div class="mt-3 flex justify-between flex-wrap">
