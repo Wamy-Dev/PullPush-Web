@@ -70,22 +70,22 @@
 			</div>
 			<div class="h-1 w-full variant-ghost-surface rounded-3xl"/>
 			{#if retrievalType === "submissions"}
-				<div class="grid grid-cols-1 sm:grid-cols-3">
+				<div class="grid grid-cols-1 sm:grid-cols-2">
 					<!-- TODO: Comparators -->
-					<div class="max-w-xs p-3">
+					<div class="max-w-lg p-3">
 						<label class="label">
 							<span>Score</span>
-							<input name="score" class="input rounded-3xl" type="number" placeholder="0">
+							<input name="score" class="input rounded-3xl" type="number" placeholder="0" step="50">
 						</label>
 					</div>
-					<div class="max-w-xs p-3">
+					<div class="max-w-lg p-3">
 						<label class="label">
 							<span>Comments</span>
-							<input name="num_comments" class="input rounded-3xl" type="number" placeholder="0">
+							<input name="num_comments" class="input rounded-3xl" type="number" placeholder="0" step="50">
 						</label>
 					</div>
 					<!-- TODO: Comparators -->
-					<div class="p-3 grid grid-cols-1 sm:grid-cols-2">
+					<!-- <div class="p-3 grid grid-cols-1 sm:grid-cols-2">
 						<label class="label">
 							<input name="over_18" class="checkbox rounded-lg" type="checkbox">
 							<span>NSFW</span>
@@ -110,7 +110,7 @@
 							<input name="contest_mode" class="checkbox rounded-lg" type="checkbox">
 							<span>Contest Mode</span>
 						</label>
-					</div>
+					</div> -->
 				</div>	
 			{:else}
 				<div class="grid grid-cols-1 sm:grid-cols-2">
