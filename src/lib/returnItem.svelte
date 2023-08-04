@@ -1,12 +1,20 @@
 <script lang="ts">
 // @ts-nocheck
+    import { retrievalTypeStore } from '$lib/stores';
     export let item;
-    export let type;
     import Sugar from 'sugar';
     import SvelteMarkdown from 'svelte-markdown';
+    import { onDestroy } from 'svelte';
+    let retrievalType;
+    const unsubscribe = retrievalTypeStore.subscribe(value => {
+        retrievalType = value;
+    });
+    onDestroy(() => {
+        unsubscribe();
+    });
 </script>
 
-{#if type==="submission"}
+{#if retrievalType === "submission"}
     <a href={`https://reddit.com${item.permalink}`} target="_blank" rel="noreferrer">
         <div class="bg-surface-100-800-token rounded-3xl max-w-5xl w-full p-4 variant-ghost-surface my-3">
             <h1 class="text-xl font-bold mr-2 flex items-center break-all">
@@ -35,7 +43,7 @@
             </div>
         </div>
     </a>
-{:else if type === "comment"}
+{:else}
     <a href={`https://reddit.com${item.permalink}`} target="_blank" rel="noreferrer">
         <div class="bg-surface-100-800-token rounded-3xl max-w-5xl w-full p-4 variant-ghost-surface my-3">
             <h1 class="sm:text-md font-bold break-all">

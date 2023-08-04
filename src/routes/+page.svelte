@@ -9,13 +9,16 @@
 	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 	import ResultItem from '$lib/returnItem.svelte';
 	import UserSection from '$lib/userSection.svelte';
+	import { retrievalTypeStore } from '$lib/stores';
+
 	let retrievalType = "submission";
 	let loading = false;
 	let returnData = [];
 	let authorData = {};
 	function changeType(e) {
+		retrievalTypeStore.set(e.target.value)
 		returnData = [];
-		retrievalType = e.target.value;
+		authorData = {};
 	}
 	async function fetchPullPush(retrievalType, value) {
 		try {
@@ -42,7 +45,7 @@
 			loading = false;
 		}
 	}
-	async function fetchMiser(author) {
+	async function fetchReddit(author) {
 		try {
 			const response = await fetch(`https://www.reddit.com/user/${author.toLowerCase()}/about.json?utm_source=reddit&utm_medium=usertext&utm_name=redditdev&utm_content=t3_1p9s0w`)
 			authorData = await response.json();
@@ -58,7 +61,7 @@
 		}
 	}
 	async function handleSubmit(e) {
-		returnData = []
+		returnData = [];
 		toastStore.clear();
 		e.preventDefault();
 		loading = true;
@@ -67,7 +70,7 @@
 		const value = formVerification(data);
 		const queryString = new URLSearchParams(value).toString();
 		if (value.author) {
-			Promise.all([fetchMiser(value.author), fetchPullPush(retrievalType, queryString)]).then(() => {
+			Promise.all([fetchReddit(value.author), fetchPullPush(retrievalType, queryString)]).then(() => {
 				loading = false;
 			});
 		} else {
@@ -75,6 +78,7 @@
 			loading = false;
 		}
 	}
+	$: retrievalType = $retrievalTypeStore;
 </script>
 
 <div class="search flex justify-center my-5 mx-5">
@@ -218,13 +222,15 @@
 		<UserSection author={authorData}/>
 	</div>
 {/if}
-<div class="results flex justify-center my-1 mx-5">
-	<div>
-		{#each returnData as item}
-			<ResultItem item={item} type={retrievalType}/>
-		{/each}
+{#if returnData}
+	<div class="results flex justify-center my-1 mx-5">
+		<div>
+			{#each returnData as item}
+				<ResultItem item={item}/>
+			{/each}
+		</div>
 	</div>
-</div>
+{/if}
 {#if returnData.length}
 	<div class="resultscount flex justify-center my-5 mx-5">
 		<p>{returnData.length} Items</p>
