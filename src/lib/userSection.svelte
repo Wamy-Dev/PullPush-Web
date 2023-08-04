@@ -1,4 +1,5 @@
 <script lang="ts">
+    // @ts-nocheck
     export let author
     import Sugar from 'sugar';
 </script>

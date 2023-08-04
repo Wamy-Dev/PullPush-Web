@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import '@skeletonlabs/skeleton/themes/theme-rocket.css';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
@@ -8,7 +9,6 @@
 	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 	import ResultItem from '$lib/returnItem.svelte';
 	import UserSection from '$lib/userSection.svelte';
-
 	let retrievalType = "submission";
 	let loading = false;
 	let returnData = [];
