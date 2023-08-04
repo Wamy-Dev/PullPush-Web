@@ -71,20 +71,30 @@
 			<div class="h-1 w-full variant-ghost-surface rounded-3xl"/>
 			{#if retrievalType === "submissions"}
 				<div class="grid grid-cols-1 sm:grid-cols-2">
-					<!-- TODO: Comparators -->
 					<div class="max-w-lg p-3">
 						<label class="label">
 							<span>Score</span>
-							<input name="score" class="input rounded-3xl" type="number" placeholder="0" step="50">
+							<div class="flex">
+								<input name="score" class="input rounded-l-3xl" type="number" placeholder="0" step="50">
+								<select name="score_comparator" class="select rounded-r-3xl">
+									<option value="=>">Greater Than</option>
+									<option value="<=">Less Than</option>
+								</select>
+							</div>
 						</label>
 					</div>
 					<div class="max-w-lg p-3">
 						<label class="label">
 							<span>Comments</span>
-							<input name="num_comments" class="input rounded-3xl" type="number" placeholder="0" step="50">
+							<div class="flex">
+								<input name="num_comments" class="input rounded-l-3xl" type="number" placeholder="0" step="50">
+								<select name="num_comments_comparator" class="select rounded-r-3xl">
+									<option value="=>">Greater Than</option>
+									<option value="<=">Less Than</option>
+								</select>
+							</div>
 						</label>
 					</div>
-					<!-- TODO: Comparators -->
 					<!-- <div class="p-3 grid grid-cols-1 sm:grid-cols-2">
 						<label class="label">
 							<input name="over_18" class="checkbox rounded-lg" type="checkbox">
