@@ -9,7 +9,11 @@
     <div class="flex justify-center">
         <div>
             <center>
-                <img src={author.data.snoovatar_img} alt="avatar" class="w-40"/>
+                <img src={author.data.snoovatar_img} alt="avatar" class="w-40 rounded-3xl mb-4" on:error={
+                    (e) => {
+                        e.target.src = "/nan.png"
+                    }
+                }/>
             </center>
             <h1 class="text-2xl text-center mb-4">/u/{author.data.name}</h1>
         </div>
