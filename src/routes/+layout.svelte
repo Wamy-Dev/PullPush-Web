@@ -47,23 +47,22 @@
 				<LightSwitch rounded="rounded-3xl" />
 			</div>
 			<div class="text-center">
-				<p>By using <a href="https://pullpush.io" 
+				<p class="break-keep">By using <a href="https://pullpush.io" 
 					target="_blank" 
 					referrerpolicy="no-referrer" 
-					class="underline cursor-pointer font-bold ">PullPush.io</a> you agree to the <a href="https://pullpush.io/tos.html" 
+					class="underline cursor-pointer font-bold break-keep">PullPush.io</a> you agree to the <a href="https://pullpush.io/tos.html" 
 					target="_blank" 
 					referrerpolicy="no-referrer" 
-					class="underline cursor-pointer font-bold">TOS</a>
+					class="underline cursor-pointer font-bold break-keep">TOS</a>
 				</p>
 			</div>
-			<div class="flex justify-end">
-				<p>WebUI made by <a href="https://github.com/Wamy-Dev" 
+			<div class="flex justify-end break-keep">
+				<p class="break-keep">WebUI made by <a href="https://github.com/Wamy-Dev" 
 					target="_blank" 
 					referrerpolicy="no-referrer" 
-					class="underline cursor-pointer font-bold">Wamy</a>
+					class="underline cursor-pointer font-bold break-keep">Wamy</a>
 				</p>
 			</div>
-			
 		</div>
 	</svelte:fragment>
 	<slot />
