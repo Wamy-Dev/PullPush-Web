@@ -8,7 +8,7 @@
 	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 
 
-	let retrievalType = "submissions";
+	let retrievalType = "submission";
 	let loading = false;
 	function changeType(e) {
 		retrievalType = e.target.value;
@@ -20,8 +20,12 @@
 		const data = new FormData(form);
 		const value = formVerification(data);
 		try {
-			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?pass=${PUBLIC_API_KEY}`)
+			const queryString = new URLSearchParams(value).toString();
+			console.log(queryString);
+			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?${queryString}&pass=${PUBLIC_API_KEY}`)
 			const json = await response.json();
+			console.log(json)
+			loading = false;
 		} catch (error) {
 			const t: ToastSettings = {
 				message: "An error occurred while searching, please try again later.",
@@ -30,7 +34,7 @@
 			};
 			toastStore.trigger(t);
 		}
-		loading = false;
+		
 	}
 </script>
 
@@ -54,8 +58,8 @@
 					<label class="label">
 						<span>Search for</span>
 						<select name="type" class="select rounded-3xl" bind:value={retrievalType} on:change={changeType}>
-							<option value="submissions">Posts</option>
-							<option value="comments">Comments</option>
+							<option value="submission">Posts</option>
+							<option value="comment">Comments</option>
 						</select>
 					</label>
 				</div>
