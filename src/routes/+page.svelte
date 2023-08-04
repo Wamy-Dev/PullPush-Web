@@ -185,4 +185,9 @@
 		{/each}
 	</div>
 </div>
+{#if returnData.length}
+	<div class="resultscount flex justify-center my-5 mx-5">
+		<p>{returnData.length} Items</p>
+	</div>
+{/if}
 
