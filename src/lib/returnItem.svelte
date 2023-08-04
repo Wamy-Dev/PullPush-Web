@@ -22,7 +22,9 @@
             </h1>
             <div>
                 {#if item.selftext}
-                    <SvelteMarkdown source={item.selftext} />
+                    <div class="mt-2">
+                        <SvelteMarkdown source={item.selftext} />
+                    </div>
                 {/if}
             </div>
             <div class="mt-3 flex justify-between">
