@@ -5,20 +5,32 @@
 	import Icon from '@iconify/svelte';
 	import formVerification from '$lib/formVerification';
 	import { PUBLIC_API_URL, PUBLIC_API_KEY } from '$env/static/public';
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+
 
 	let retrievalType = "submissions";
 	let loading = false;
 	function changeType(e) {
 		retrievalType = e.target.value;
 	}
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 		loading = true;
 		const form = e.target;
 		const data = new FormData(form);
 		const value = formVerification(data);
-		console.log(value);
+		try {
+			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?pass=${PUBLIC_API_KEY}`)
+			const json = await response.json();
+		} catch (error) {
+			const t: ToastSettings = {
+				message: "An error occurred while searching, please try again later.",
+				background: "variant-filled-error",
+				hoverable: true
+			};
+			toastStore.trigger(t);
+		}
+		loading = false;
 	}
 </script>
 
