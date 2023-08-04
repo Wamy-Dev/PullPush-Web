@@ -7,29 +7,24 @@
 	import { PUBLIC_API_URL, PUBLIC_API_KEY } from '$env/static/public';
 	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 	import ResultItem from '$lib/returnItem.svelte';
+	import UserSection from '$lib/userSection.svelte';
 
 	let retrievalType = "submission";
 	let loading = false;
 	let returnData = [];
+	let authorData = {};
 	function changeType(e) {
 		returnData = [];
 		retrievalType = e.target.value;
 	}
-	async function handleSubmit(e) {
-		e.preventDefault();
-		loading = true;
-		const form = e.target;
-		const data = new FormData(form);
-		const value = formVerification(data);
+	async function fetchPullPush(retrievalType, value) {
 		try {
-			const queryString = new URLSearchParams(value).toString();
-			console.log(queryString);
-			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?${queryString}&pass=${PUBLIC_API_KEY}`)
+			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?${value}&pass=${PUBLIC_API_KEY}`)
 			const json = await response.json();
 			returnData = [];
 			returnData = json.data;
-			loading = false;
-		} catch (error) {
+			return true
+		} catch {
 			const t: ToastSettings = {
 				message: "An error occurred while searching, please try again later.",
 				background: "variant-filled-error",
@@ -39,7 +34,38 @@
 			loading = false;
 		}
 	}
-	console.log(returnData);
+	async function fetchMiser(author) {
+		try {
+			const response = await fetch(`https://www.reddit.com/user/${author.toLowerCase()}/about.json?utm_source=reddit&utm_medium=usertext&utm_name=redditdev&utm_content=t3_1p9s0w`)
+			authorData = await response.json();
+			return true
+		} catch {
+			const t: ToastSettings = {
+				message: "An error occurred while searching, please try again later.",
+				background: "variant-filled-error",
+				hoverable: true
+			};
+			toastStore.trigger(t);
+			loading = false;
+		}
+	}
+	async function handleSubmit(e) {
+		returnData = []
+		e.preventDefault();
+		loading = true;
+		const form = e.target;
+		const data = new FormData(form);
+		const value = formVerification(data);
+		const queryString = new URLSearchParams(value).toString();
+		if (value.author) {
+			Promise.all([fetchMiser(value.author), fetchPullPush(retrievalType, queryString)]).then(() => {
+				loading = false;
+			});
+		} else {
+			await fetchPullPush(retrievalType, queryString);
+			loading = false;
+		}
+	}
 </script>
 
 <div class="search flex justify-center my-5 mx-5">
@@ -48,7 +74,7 @@
 			<div class="grid grid-cols-1 sm:grid-cols-3">
 				<div class="max-w-xs p-3">
 					<label class="label">
-						<span>Username</span>
+						<span>Username<span class="text-[10px] ml-2 text-green-400">yields analytics</span></span>
 						<input name="author" class="input rounded-3xl" type="text" placeholder="spez">
 					</label>
 				</div>
@@ -178,7 +204,12 @@
 		</form>
 	</div>
 </div>
-<div class="results flex justify-center my-5 mx-5">
+{#if Object.keys(authorData).length > 0}
+	<div class="user flex justify-center mt-1 mx-5">
+		<UserSection author={authorData}/>
+	</div>
+{/if}
+<div class="results flex justify-center my-1 mx-5">
 	<div>
 		{#each returnData as item}
 			<ResultItem item={item} type={retrievalType}/>
