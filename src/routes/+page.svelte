@@ -3,9 +3,8 @@
 	import '@skeletonlabs/skeleton/themes/theme-rocket.css';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
-	import Icon from '@iconify/svelte';
 	import formVerification from '$lib/formVerification';
-	import { PUBLIC_API_URL, PUBLIC_API_KEY } from '$env/static/public';
+	import { PUBLIC_API_URL } from '$env/static/public';
 	import { ProgressRadial, toastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 	import ResultItem from '$lib/returnItem.svelte';
 	import UserSection from '$lib/userSection.svelte';
@@ -22,7 +21,7 @@
 	}
 	async function fetchPullPush(retrievalType, value) {
 		try {
-			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?${value}&pass=${PUBLIC_API_KEY}`)
+			const response = await fetch(`${PUBLIC_API_URL}/reddit/search/${retrievalType}/?${value}`)
 			const json = await response.json();
 			returnData = [];
 			returnData = json.data;

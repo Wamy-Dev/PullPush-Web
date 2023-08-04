@@ -3,7 +3,6 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import Icon from '@iconify/svelte';
 	import { LightSwitch, Toast } from '@skeletonlabs/skeleton';
 </script>
 <Toast rounded="rounded-3xl" shadow="shadow-lg"/>
