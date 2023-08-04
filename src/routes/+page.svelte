@@ -4,13 +4,17 @@
 	import '../app.postcss';
 	import Icon from '@iconify/svelte';
 	import formVerification from '$lib/formVerification';
+	import { PUBLIC_API_URL, PUBLIC_API_KEY } from '$env/static/public';
+	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
 	let retrievalType = "submissions";
+	let loading = false;
 	function changeType(e) {
 		retrievalType = e.target.value;
 	}
 	function handleSubmit(e) {
 		e.preventDefault();
+		loading = true;
 		const form = e.target;
 		const data = new FormData(form);
 		const value = formVerification(data);
@@ -125,10 +129,17 @@
 				</div>
 			{/if}
 			<div>
-				<button class="btn variant-filled rounded-3xl m-3" type="submit">
-					<Icon icon="carbon:search" width=24 />
-					<span>Search</span>
-				</button>
+				{#if loading}
+					<button class="btn variant-filled rounded-3xl m-3" type="button" disabled>
+						<Icon icon="carbon:search" width=24 />
+						<span><ProgressRadial width="w-[24px]" meter="stroke-primary-500" track="stroke-primary-500/30" /></span>
+					</button>
+				{:else}
+					<button class="btn variant-filled rounded-3xl m-3" type="submit">
+						<Icon icon="carbon:search" width=24 />
+						<span>Search</span>
+					</button>
+				{/if}
 				<button class="btn variant-filled rounded-3xl m-3" type="reset">
 					<Icon icon="carbon:close" width=24 />
 					<span>Reset</span>
